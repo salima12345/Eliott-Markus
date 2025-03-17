@@ -1,0 +1,8 @@
+<svg id="Composant_26_2" data-name="Composant 26 – 2" xmlns="http://www.w3.org/2000/svg" width="114" height="114" viewBox="0 0 114 114">
+  <rect id="Rectangle_617" data-name="Rectangle 617" width="114" height="114" fill="#e0643a"/>
+  <path id="Icon_ionic-ios-heart" data-name="Icon ionic-ios-heart" d="M76.295,3.938h-.24A27.293,27.293,0,0,0,53.267,16.411,27.293,27.293,0,0,0,30.48,3.938h-.24A27.119,27.119,0,0,0,3.375,31.043c0,8.875,3.886,21.468,11.466,31.83,14.44,19.741,38.427,37.012,38.427,37.012s23.987-17.27,38.427-37.012c7.58-10.362,11.466-22.955,11.466-31.83A27.119,27.119,0,0,0,76.295,3.938Z" transform="translate(3.733 7.152)"/>
+  <g id="Icon_feather-arrow-up-right" data-name="Icon feather-arrow-up-right" transform="translate(38.5 38.5)">
+    <path id="Tracé_2300" data-name="Tracé 2300" d="M10.5,25.55,25.55,10.5" fill="none" stroke="#e0643a" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Tracé_2301" data-name="Tracé 2301" d="M10.5,10.5H25.55V25.55" fill="none" stroke="#e0643a" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g>
+</svg>

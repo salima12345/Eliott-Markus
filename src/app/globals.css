@@ -1,0 +1,267 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+ 
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('/fonts/Gilroy-Regular/font.woff2') format('woff2'), url('/fonts/Gilroy-Regular/font.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('/fonts/Gilroy-Bold/font.woff2') format('woff2'), url('/fonts/Gilroy-Bold/font.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('/fonts/Gilroy-Semibold/font.woff2') format('woff2'), url('/fonts/Gilroy-Semibold/font.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('/fonts/Gilroy-Medium/font.woff2') format('woff2'), url('/fonts/Gilroy-Medium/font.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('/fonts/Gilroy-Light/font.woff2') format('woff2'), url('/fonts/Gilroy-Light/font.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+html {
+    scroll-behavior: auto !important;
+  }
+
+
+  
+  :root[class~="light"] {
+    --background: #ffffff;
+    --foreground: #222222;
+  }
+  
+  :root[class~="dark"] {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+  
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    
+
+  }
+html, body {
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active,
+input:-webkit-autofill:focus {
+    background-color: #222222 !important;
+    color: white!important;
+    -webkit-box-shadow: 0 0 0 1000px #222222 inset !important;
+    -webkit-text-fill-color: white  !important;
+}
+
+
+.container {
+  
+  @apply mx-auto px-4 py-6 max-w-[1440px] ;
+
+}
+
+@media (min-width: 481px) {
+  .container {
+      @apply px-4 py-6;
+  }
+}
+
+@media (min-width: 601px) {
+  .container {
+      @apply px-6 py-4;
+  }
+}
+
+@media (min-width: 769px) {
+  .container {
+      @apply px-6 py-4;
+  }
+}
+
+@media (min-width: 1025px) {
+  .container {
+      @apply px-8 py-6;
+  }
+}
+
+@media (min-width: 1281px) {
+  .container {
+      @apply px-8 py-[20px];
+  }
+}
+
+@media (min-width: 1441px) {
+  .container {
+      @apply px-[100px] py-[20px];
+  }
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+
+
+.em-values {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-top: 160px;
+    padding-bottom: 560px;
+  }
+  
+  .em-values .content-em-values {
+    width: 1200px;
+    max-width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .em-values .content-em-values {
+    width: 1200px;
+    max-width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .em-values .content-em-values .images .img,
+.em-values .content-em-values .images .values {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+  
+  .em-values .content-em-values .images .values {
+    width: 266px;
+    height: 266px;
+    border-radius: 54px;
+    position: absolute;
+    z-index: 1;
+    overflow: hidden;
+  }
+  
+  .em-values .content-em-values .images .values .bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+  
+  .em-values .content-em-values .images .values .bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .em-values .content-em-values .images .values .info {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    align-items: flex-start;
+    padding-right: 30px;
+    bottom: 30px;
+    left: 40px;
+  }
+  
+  .em-values .content-em-values .images .values .info h2 {
+    font-family: "Gilroy-Bold", sans-serif;
+    font-size: 20px;
+    line-height: 25px;
+    color: #fff;
+  }
+  
+  .em-values .content-em-values .images .values .info button {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 0;
+    outline: 0;
+    margin-top: 10px;
+  }
+  
+  .em-values .content-em-values .images .img {
+    width: 306px;
+    height: 306px;
+    position: absolute;
+    z-index: 0;
+  }
+  
+  .em-values .content-em-values .images .img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+
+  
+
+  
+  .em-values .content-em-values .values {
+    left: 39%;
+    bottom: -780px;
+    transform: rotate(315deg);
+    opacity: 0;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
+
+
+
+  
+   
+ 
+ 

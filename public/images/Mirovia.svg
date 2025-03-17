@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="102.397" height="29.436" viewBox="0 0 102.397 29.436">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Tracé_218" data-name="Tracé 218" d="M468.106,1111.688l-2.646,4.113-2.647-4.113h-1.628v8.7h1.5v-6.213l2.722,4.077h.05l2.746-4.1v6.238h1.528v-8.7Z" transform="translate(-461.185 -1111.688)" fill="#fff"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <path id="Tracé_219" data-name="Tracé 219" d="M488.94,1111.688v8.7h7.532v-1.367h-6v-2.336h6v-1.367h-6v-2.262h6v-1.367Z" transform="translate(-488.94 -1111.688)" fill="#fff"/>
+    </clipPath>
+    <clipPath id="clip-path-3">
+      <path id="Tracé_220" data-name="Tracé 220" d="M521.058,1111.688l-2.647,4.113-2.647-4.113h-1.628v8.7h1.5v-6.213l2.721,4.077h.05l2.746-4.1v6.238h1.529v-8.7Z" transform="translate(-514.136 -1111.688)" fill="#fff"/>
+    </clipPath>
+    <clipPath id="clip-path-4">
+      <path id="Tracé_221" data-name="Tracé 221" d="M543.395,1116.646h3.672c1.205,0,1.789.435,1.789,1.168v.025c0,.783-.634,1.193-1.678,1.193h-3.784Zm0-3.6h3.448c.982,0,1.529.423,1.529,1.106v.025c0,.8-.659,1.181-1.641,1.181h-3.336Zm-1.5-1.354v8.7h5.275c1.938,0,3.219-.833,3.219-2.386v-.025a2.133,2.133,0,0,0-1.728-2.112,2.071,2.071,0,0,0,1.243-1.939v-.025a1.949,1.949,0,0,0-.584-1.442,3.145,3.145,0,0,0-2.275-.77Z" transform="translate(-541.891 -1111.688)" fill="#fff"/>
+    </clipPath>
+    <clipPath id="clip-path-5">
+      <path id="Tracé_222" data-name="Tracé 222" d="M568.451,1111.688v8.7h7.532v-1.367h-6v-2.336h6v-1.367h-6v-2.262h6v-1.367Z" transform="translate(-568.451 -1111.688)" fill="#fff"/>
+    </clipPath>
+    <clipPath id="clip-path-6">
+      <path id="Tracé_223" data-name="Tracé 223" d="M595.176,1113.08h3.473c1.13,0,1.8.509,1.8,1.442v.024c0,.883-.7,1.454-1.79,1.454h-3.485Zm-1.529-1.392v8.7h1.529v-3.032h3.162l2.137,3.032h1.8l-2.349-3.293a2.611,2.611,0,0,0,2.076-2.635v-.024a2.629,2.629,0,0,0-.721-1.877,3.5,3.5,0,0,0-2.511-.87Z" transform="translate(-593.647 -1111.688)" fill="#fff"/>
+    </clipPath>
+    <clipPath id="clip-path-7">
+      <path id="Tracé_224" data-name="Tracé 224" d="M635.192,1115.872v-.026a2.939,2.939,0,0,1,2.933-3.069,2.98,2.98,0,0,1,2.957,3.094v.024a2.939,2.939,0,0,1-2.932,3.07,2.98,2.98,0,0,1-2.958-3.094m-1.6,0v.024a4.549,4.549,0,0,0,9.1-.024v-.026a4.549,4.549,0,0,0-9.1.026" transform="translate(-633.589 -1111.373)" fill="#fff"/>
+    </clipPath>
+    <clipPath id="clip-path-8">
+      <path id="Tracé_225" data-name="Tracé 225" d="M661.685,1111.688v8.7h1.529v-3.542h4.493v-1.391h-4.493v-2.374h4.493v-1.392Z" transform="translate(-661.685 -1111.688)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="Groupe_43" data-name="Groupe 43" transform="translate(-461.185 -1111.373)">
+    <path id="Tracé_213" data-name="Tracé 213" d="M474.429,1144.943H472.4l-4.593,6.714-4.594-6.714h-2.028v13.493h2.4v-8.705l3.769,5.44h.867l3.769-5.44v8.705h2.437Z" transform="translate(0 -17.672)" fill="#fff"/>
+    <rect id="Rectangle_46" data-name="Rectangle 46" width="2.388" height="13.485" transform="translate(480.881 1127.299)" fill="#fff"/>
+    <rect id="Rectangle_47" data-name="Rectangle 47" width="2.388" height="13.485" transform="translate(541.593 1127.299)" fill="#fff"/>
+    <path id="Tracé_214" data-name="Tracé 214" d="M598.273,1158.378h2.214l5.982-13.581h-2.448l-4.6,10.75-4.6-10.75h-2.525Z" transform="translate(-69.016 -17.595)" fill="#fff"/>
+    <path id="Tracé_215" data-name="Tracé 215" d="M655.662,1144.85h-2.214l-5.981,13.582h2.447l4.6-10.75,4.6,10.75h2.525Z" transform="translate(-98.062 -17.623)" fill="#fff"/>
+    <path id="Tracé_216" data-name="Tracé 216" d="M530.467,1153.38a4.054,4.054,0,0,0,3.244-4.084v-.038a4.062,4.062,0,0,0-1.126-2.909,5.505,5.505,0,0,0-3.923-1.348H522.6v2.177l5.865-.019c1.767,0,2.816.79,2.816,2.235v.038c0,1.368-1.088,2.254-2.8,2.254l-5.884-.016v6.816h2.388v-4.7h2.991l3.34,4.7h2.815Z" transform="translate(-32.331 -17.702)" fill="#fff"/>
+    <path id="Tracé_217" data-name="Tracé 217" d="M562.989,1147.207a4.426,4.426,0,1,1-4.462,4.426,4.449,4.449,0,0,1,4.462-4.426m0-2.324a6.75,6.75,0,1,0,6.8,6.75,6.778,6.778,0,0,0-6.8-6.75" transform="translate(-50.009 -17.64)" fill="#fff"/>
+    <g id="Groupe_44" data-name="Groupe 44" transform="translate(461.185 1111.522)">
+      <g id="Groupe_43-2" data-name="Groupe 43" clip-path="url(#clip-path)">
+        <rect id="Rectangle_48" data-name="Rectangle 48" width="9.439" height="9.304" transform="matrix(0.091, -0.996, 0.996, 0.091, -0.786, 8.627)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="Groupe_46" data-name="Groupe 46" transform="translate(474.329 1111.522)">
+      <g id="Groupe_45" data-name="Groupe 45" clip-path="url(#clip-path-2)">
+        <rect id="Rectangle_49" data-name="Rectangle 49" width="9.347" height="8.291" transform="translate(-0.786 8.627) rotate(-84.793)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="Groupe_48" data-name="Groupe 48" transform="translate(486.262 1111.522)">
+      <g id="Groupe_47" data-name="Groupe 47" clip-path="url(#clip-path-3)">
+        <rect id="Rectangle_50" data-name="Rectangle 50" width="9.439" height="9.304" transform="translate(-0.786 8.627) rotate(-84.793)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="Groupe_50" data-name="Groupe 50" transform="translate(499.406 1111.522)">
+      <g id="Groupe_49" data-name="Groupe 49" clip-path="url(#clip-path-4)">
+        <rect id="Rectangle_51" data-name="Rectangle 51" width="9.434" height="9.248" transform="matrix(0.091, -0.996, 0.996, 0.091, -0.786, 8.627)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="Groupe_52" data-name="Groupe 52" transform="translate(511.985 1111.522)">
+      <g id="Groupe_51" data-name="Groupe 51" transform="translate(0)" clip-path="url(#clip-path-5)">
+        <rect id="Rectangle_52" data-name="Rectangle 52" width="9.347" height="8.291" transform="translate(-0.786 8.627) rotate(-84.793)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="Groupe_54" data-name="Groupe 54" transform="translate(523.917 1111.522)">
+      <g id="Groupe_53" data-name="Groupe 53" clip-path="url(#clip-path-6)">
+        <rect id="Rectangle_53" data-name="Rectangle 53" width="9.446" height="9.384" transform="matrix(0.091, -0.996, 0.996, 0.091, -0.786, 8.627)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="Groupe_56" data-name="Groupe 56" transform="translate(542.833 1111.373)">
+      <g id="Groupe_55" data-name="Groupe 55" transform="translate(0)" clip-path="url(#clip-path-7)">
+        <rect id="Rectangle_54" data-name="Rectangle 54" width="9.786" height="9.876" transform="matrix(0.091, -0.996, 0.996, 0.091, -0.813, 8.923)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="Groupe_58" data-name="Groupe 58" transform="translate(556.139 1111.522)">
+      <g id="Groupe_57" data-name="Groupe 57" clip-path="url(#clip-path-8)">
+        <rect id="Rectangle_55" data-name="Rectangle 55" width="9.209" height="6.787" transform="matrix(0.091, -0.996, 0.996, 0.091, -0.786, 8.627)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>
