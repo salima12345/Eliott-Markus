@@ -24,9 +24,8 @@ interface MadeInPost {
 }
 
 interface PageProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
+
 }
 
 export async function generateStaticParams() {
@@ -37,7 +36,7 @@ export async function generateStaticParams() {
 }
 
 export default async function MadeInPageServer({ params }: PageProps) {
-  const { slug } = params;
+  const { slug } = await params;
 
   try {
     // Fetch all MadeIn posts to get the list of slugs
