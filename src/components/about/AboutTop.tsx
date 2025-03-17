@@ -44,12 +44,12 @@ function AboutTop() {
 
   return (
     <section className="flex flex-col xl:flex-row xl:justify-between gap-24 w-full">
-      <div className="overflow-hidden max-w-[535px] w-full 3xl:-ml-12">
+      <div className="overflow-hidden 2xl:max-w-[530px]  w-full 3xl:-ml-12">
         <motion.h1
           initial={{ y: "100%", opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 2, ease: [0.33, 1, 0.68, 1] }}
-          className="font-semibold leading-tight text-[60px] xl:text-[80px]"
+          className="font-semibold leading-tight text-[56px] md:text-[60px] xl:text-[80px]"
         >
           {titleText}
         </motion.h1>
