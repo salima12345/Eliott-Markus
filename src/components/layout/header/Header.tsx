@@ -24,16 +24,12 @@ export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isExpertiseExpanded, setIsExpertiseExpanded] = useState(false);
   const [isMadeInExpanded, setIsMadeInExpanded] = useState(false);
-  const [expertiseUserCollapsed, setExpertiseUserCollapsed] = useState(false);
-  const [madeInUserCollapsed, setMadeInUserCollapsed] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   // Reset menu state when pathname changes
   useEffect(() => {
     setIsMenuOpen(false);
     setIsModalOpen(false);
-    setExpertiseUserCollapsed(false);
-    setMadeInUserCollapsed(false);
     setIsExpertiseExpanded(false);
     setIsMadeInExpanded(false);
     document.body.classList.remove("menu-open");
@@ -77,12 +73,10 @@ export default function Header() {
     if (newMenuState) {
       setIsExpertiseExpanded(true);
       setIsMadeInExpanded(true);
-      setExpertiseUserCollapsed(false);
-      setMadeInUserCollapsed(false);
+      
     } else {
       // When closing, reset to previous states
-      setExpertiseUserCollapsed(false);
-      setMadeInUserCollapsed(false);
+    
       setIsExpertiseExpanded(false);
       setIsMadeInExpanded(false);
     }
@@ -91,8 +85,7 @@ export default function Header() {
   const handleCloseMenu = () => {
     setIsMenuOpen(false);
     document.body.classList.remove("menu-open");
-    setExpertiseUserCollapsed(false);
-    setMadeInUserCollapsed(false);
+ 
     setIsExpertiseExpanded(false);
     setIsMadeInExpanded(false);
   };
@@ -109,16 +102,12 @@ export default function Header() {
 
   const handleExpertiseToggle = (expanded: boolean) => {
     setIsExpertiseExpanded(expanded);
-    if (!expanded) {
-      setExpertiseUserCollapsed(true);
-    }
+   
   };
 
   const handleMadeInToggle = (expanded: boolean) => {
     setIsMadeInExpanded(expanded);
-    if (!expanded) {
-      setMadeInUserCollapsed(true);
-    }
+    
   };
 
   return (
