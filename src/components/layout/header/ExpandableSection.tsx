@@ -51,11 +51,10 @@ function ExpandableSection<T>({
   const handleAutoExpand = useCallback(
     (shouldExpand: boolean) => {
       if (navigationState.isNavigating) return; // Skip if navigating
-      if (isControlled) {
-        parentSetExpanded(shouldExpand);
-      } else {
-        setLocalIsExpanded(shouldExpand);
-      }
+      setTimeout(() => {
+        if (isControlled) parentSetExpanded(shouldExpand);
+        else setLocalIsExpanded(shouldExpand);
+      }, 50); // Small delay to avoid conflicts
     },
     [isControlled, parentSetExpanded, navigationState.isNavigating]
   );

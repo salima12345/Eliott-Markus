@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, startTransition } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import ExpandableSection from "./ExpandableSection";
 import { useQuery } from "@apollo/client";
@@ -58,14 +58,19 @@ export default function MadeIn({
     const isActive = pathname === item.path;
 
     const handleClick = (e: React.MouseEvent) => {
-      e.stopPropagation(); // Stop event propagation
+      e.stopPropagation();
       if (isNavigating || pathname === item.path) return;
 
       setIsNavigating(true);
-      if (setExpanded) {
-        setExpanded(false);
-      }
-      router.push(item.path);
+
+      // Use startTransition for smoother navigation
+      startTransition(() => {
+        if (setExpanded) setExpanded(false);
+        router.push(item.path);
+      });
+
+      // Reset navigation state after a short delay
+      setTimeout(() => setIsNavigating(false), 300);
     };
 
     return (
@@ -77,6 +82,7 @@ export default function MadeIn({
           ${isNavigating ? "opacity-50 pointer-events-none" : "opacity-100"}
           ${index === totalItems - 1 ? "pb-4" : ""}
         `}
+        onMouseEnter={() => router.prefetch(item.path)} // Prefetch route on hover
         onClick={handleClick}
       >
         <p className={`font-semibold ${isActive ? "text-[#E0643A]" : ""}`}>
@@ -87,8 +93,9 @@ export default function MadeIn({
     );
   };
 
+  // Reset navigation state when pathname changes
   useEffect(() => {
-    setIsNavigating(false); // Reset navigation state on pathname change
+    setIsNavigating(false);
   }, [pathname]);
 
   const hasData = !loading && !error && madeInItems.length > 0;

@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, startTransition } from "react";
 import ExpandableSection from "./ExpandableSection";
 import Image from "next/image";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation"; // Updated imports
 import { useQuery } from "@apollo/client";
 import { GET_EXPERTISES } from "@/lib/graphql/queries/ExpertiseQuery";
 
@@ -43,7 +43,7 @@ export default function Expertise({
   isMenuOpen = false,
 }: ExpertiseProps) {
   const router = useRouter();
-  const pathname = usePathname();
+  const pathname = usePathname(); // Get current pathname
   const [isNavigating, setIsNavigating] = useState(false);
 
   const { data, loading, error } = useQuery(GET_EXPERTISES);
@@ -64,14 +64,19 @@ export default function Expertise({
     const isActive = pathname === item.path;
 
     const handleClick = (e: React.MouseEvent) => {
-      e.stopPropagation(); // Stop event propagation
+      e.stopPropagation();
       if (isNavigating || pathname === item.path) return;
 
       setIsNavigating(true);
-      if (setExpanded) {
-        setExpanded(false);
-      }
-      router.push(item.path);
+
+      // Use startTransition for smoother navigation
+      startTransition(() => {
+        if (setExpanded) setExpanded(false);
+        router.push(item.path);
+      });
+
+      // Reset navigation state after a short delay
+      setTimeout(() => setIsNavigating(false), 300);
     };
 
     return (
@@ -83,6 +88,7 @@ export default function Expertise({
           ${isNavigating ? "opacity-50 pointer-events-none" : "opacity-100"}
           ${index === totalItems - 1 ? "pb-4" : ""}
         `}
+        onMouseEnter={() => router.prefetch(item.path)} // Prefetch route on hover
         onClick={handleClick}
       >
         <div className="relative w-5 h-5">
@@ -101,9 +107,10 @@ export default function Expertise({
     );
   };
 
+  // Reset navigation state when pathname changes
   useEffect(() => {
-    setIsNavigating(false); // Reset navigation state on pathname change
-  }, [pathname]);
+    setIsNavigating(false);
+  }, [pathname]); // Watch for pathname changes
 
   const hasData = !loading && !error && expertises.length > 0;
   const effectiveIsExpanded = hasData ? isExpanded : false;
