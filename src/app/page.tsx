@@ -24,7 +24,6 @@ function App() {
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
         className="overflow-hidden"
       >
         <Hero />
@@ -34,7 +33,6 @@ function App() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.3 }}
       >
         <About />
       </motion.div>
@@ -43,7 +41,6 @@ function App() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.3 }}
         className="hidden xl:block"
       >
         <Values />
@@ -53,7 +50,6 @@ function App() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.3 }}
         className="xl:hidden"
       >
         <ValuesMobile />
@@ -63,7 +59,6 @@ function App() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.3 }}
       >
         <Realization />
       </motion.div>
@@ -72,7 +67,6 @@ function App() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.3 }}
       >
         <Clients />
       </motion.div>
@@ -81,7 +75,6 @@ function App() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.3 }}
       >
         <Footer />
       </motion.div>
