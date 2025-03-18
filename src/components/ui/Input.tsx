@@ -46,7 +46,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
         aria-autocomplete="none"
         placeholder={placeholder}
         className={` 
-          w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500
+          w-full p-2  rounded focus:outline-none focus:ring-2 focus:ring-blue-500
           ${className}
           [&:-webkit-autofill]:bg-transparent
           [&:-webkit-autofill]:text-white

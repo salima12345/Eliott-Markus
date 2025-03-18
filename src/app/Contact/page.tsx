@@ -60,7 +60,7 @@ const Contact: React.FC = () => {
 
   return (
     <>
-    <div className="container mx-auto px-4 h-screen mt-16">
+    <div className="container mx-auto px-4 h-screen mt-16 mb-5">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="relative w-full rounded-[27px] bg-grayDark p-5 md:p-8 flex flex-col xl:flex-row gap-5"
@@ -148,7 +148,7 @@ const Contact: React.FC = () => {
                     {...field}
                     placeholder="First Name *"
                     error={errors.firstName?.message}
-                    className="w-full bg-transparent border-b border-[#2e2e2e] outline-none py-3 transition-all text-white placeholder:text-[#454545]"
+                    className="w-full bg-transparent border-b border-b-[#2e2e2e] outline-none py-3 transition-all text-white placeholder:text-[#454545]"
                   />
                 )}
               />
@@ -163,7 +163,7 @@ const Contact: React.FC = () => {
                     {...field}
                     placeholder="Last Name *"
                     error={errors.lastName?.message}
-                    className="w-full bg-transparent border-b border-[#2e2e2e] outline-none py-3 transition-all placeholder:text-[#454545]"
+                    className="w-full bg-transparent border-b border-b-[#2e2e2e] outline-none py-3 transition-all placeholder:text-[#454545]"
                   />
                 )}
               />
@@ -179,7 +179,7 @@ const Contact: React.FC = () => {
                     type="email"
                     placeholder="Email Address *"
                     error={errors.email?.message}
-                    className="w-full bg-transparent border-b border-[#2e2e2e] outline-none py-3 transition-all placeholder:text-[#454545]"
+                    className="w-full bg-transparent border-b border-b-[#2e2e2e] outline-none py-3 transition-all placeholder:text-[#454545]"
                   />
                 )}
               />
@@ -195,7 +195,7 @@ const Contact: React.FC = () => {
                     type="tel"
                     placeholder="Phone Number *"
                     error={errors.phone?.message}
-                    className="w-full bg-transparent border-b border-[#2e2e2e] outline-none py-3 transition-all placeholder:text-[#454545]"
+                    className="w-full bg-transparent border-b border-b-[#2e2e2e] outline-none py-3 transition-all placeholder:text-[#454545]"
                   />
                 )}
               />
@@ -210,7 +210,7 @@ const Contact: React.FC = () => {
                     {...field}
                     placeholder="City"
                     error={errors.city?.message}
-                    className="w-full bg-transparent border-b border-[#2e2e2e] outline-none py-3 transition-all placeholder:text-[#454545]"
+                    className="w-full bg-transparent border-b border-b-[#2e2e2e] outline-none py-3 transition-all placeholder:text-[#454545]"
                   />
                 )}
               />
@@ -226,7 +226,7 @@ const Contact: React.FC = () => {
                     type="url"
                     placeholder="Website"
                     error={errors.website?.message}
-                    className="w-full bg-transparent border-b border-[#2e2e2e] outline-none py-3 transition-all placeholder:text-[#454545]"
+                    className="w-full bg-transparent border-b border-b-[#2e2e2e] outline-none py-3 transition-all placeholder:text-[#454545]"
                   />
                 )}
               />
@@ -243,7 +243,7 @@ const Contact: React.FC = () => {
                   {...field}
                   rows={4}
                   placeholder={formContent.messagePlaceholder}
-                  className="w-full bg-transparent border border-[#2e2e2e] rounded-lg p-3"
+                  className="w-full bg-transparent border border-b-[#2e2e2e] rounded-lg p-3"
                 />
               )}
             />
