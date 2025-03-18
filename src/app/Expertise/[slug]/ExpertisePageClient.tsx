@@ -178,7 +178,7 @@ const ExpertisePageClient: React.FC<ExpertisePageClientProps> = ({
           </motion.div>
         </div>
         <div className="pt-20">
-          <AnimatedTitle text={`The ${title} Team`} className="font-semibold text-[36px] mb-5" />
+          <AnimatedTitle text={`The ${title} Team`} className="font-semibold  text-[26px] xl:text-[36px]  mb-5" />
           <TeamReveal members={members} />
         </div>
         <div>
