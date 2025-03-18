@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { useQuery } from "@apollo/client";
 import { GET_EXPERTISES } from "@/lib/graphql/queries/ExpertiseQuery";
+import { startTransition } from "react";
 
 interface ExpertiseItem {
   icon: string;
@@ -56,6 +57,24 @@ export default function Expertise({
       expertiseId: expertise.expertiseId,
     })) || [];
 
+  // Prefetch des routes au montage ou au changement de données
+  useEffect(() => {
+    expertises.forEach((item) => {
+      router.prefetch(item.path);
+    });
+  }, [expertises, router]);
+
+  const handleClick = (e: React.MouseEvent, item: ExpertiseItem) => {
+    e.stopPropagation();
+    if (isNavigating || pathname === item.path) return;
+
+    // Démarre une transition React pour prioriser le rendu
+    startTransition(() => {
+      setIsNavigating(true);
+      router.push(item.path);
+    });
+  };
+
   const renderExpertiseItem = (
     item: ExpertiseItem,
     index: number,
@@ -63,13 +82,6 @@ export default function Expertise({
   ) => {
     const isActive = pathname === item.path;
 
-    const handleClick = (e: React.MouseEvent) => {
-      e.stopPropagation();
-      if (isNavigating || pathname === item.path) return;
-    
-      setIsNavigating(true);
-      router.push(item.path);
-    };
     return (
       <div
         key={index}
@@ -79,7 +91,7 @@ export default function Expertise({
           ${isNavigating ? "opacity-50 pointer-events-none" : "opacity-100"}
           ${index === totalItems - 1 ? "pb-4" : ""}
         `}
-        onClick={handleClick}
+        onClick={(e) => handleClick(e, item)}
       >
         <div className="relative w-5 h-5">
           <Image
@@ -98,7 +110,7 @@ export default function Expertise({
   };
 
   useEffect(() => {
-    setIsNavigating(false); // Reset navigation state on pathname change
+    setIsNavigating(false);
   }, [pathname]);
 
   const hasData = !loading && !error && expertises.length > 0;

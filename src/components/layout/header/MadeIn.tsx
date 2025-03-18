@@ -5,6 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 import ExpandableSection from "./ExpandableSection";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_MADE_IN } from "@/lib/graphql/queries/MadeInQueries";
+import { startTransition } from "react";
 
 interface MadeInItem {
   title: string;
@@ -50,20 +51,30 @@ export default function MadeIn({
       id: item.id,
     })) || [];
 
+  // Prefetch des routes au montage ou au changement de données
+  useEffect(() => {
+    madeInItems.forEach((item) => {
+      router.prefetch(item.path);
+    });
+  }, [madeInItems, router]);
+
+  const handleClick = (e: React.MouseEvent, item: MadeInItem) => {
+    e.stopPropagation();
+    if (isNavigating || pathname === item.path) return;
+
+    // Démarre une transition React pour prioriser le rendu
+    startTransition(() => {
+      setIsNavigating(true);
+      router.push(item.path);
+    });
+  };
+
   const renderMadeInItem = (
     item: MadeInItem,
     index: number,
     totalItems: number
   ) => {
     const isActive = pathname === item.path;
-
-    const handleClick = (e: React.MouseEvent) => {
-      e.stopPropagation();
-      if (isNavigating || pathname === item.path) return;
-    
-      setIsNavigating(true);
-      router.push(item.path);
-    };
 
     return (
       <div
@@ -74,7 +85,7 @@ export default function MadeIn({
           ${isNavigating ? "opacity-50 pointer-events-none" : "opacity-100"}
           ${index === totalItems - 1 ? "pb-4" : ""}
         `}
-        onClick={handleClick}
+        onClick={(e) => handleClick(e, item)}
       >
         <p className={`font-semibold ${isActive ? "text-[#E0643A]" : ""}`}>
           {item.title}
@@ -85,7 +96,7 @@ export default function MadeIn({
   };
 
   useEffect(() => {
-    setIsNavigating(false); // Reset navigation state on pathname change
+    setIsNavigating(false); 
   }, [pathname]);
 
   const hasData = !loading && !error && madeInItems.length > 0;
