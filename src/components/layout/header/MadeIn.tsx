@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect, startTransition } from "react";
+import React, { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import ExpandableSection from "./ExpandableSection";
-import { useQuery } from "@apollo/client";
+import { useQuery } from '@apollo/client';
 import { GET_ALL_MADE_IN } from "@/lib/graphql/queries/MadeInQueries";
 
 interface MadeInItem {
@@ -42,35 +42,29 @@ export default function MadeIn({
 
   const { data, loading, error } = useQuery(GET_ALL_MADE_IN);
 
-  const madeInItems: MadeInItem[] =
-    data?.allMadeInEM?.nodes?.map((item: MadeInNode) => ({
-      title: item.title,
-      slug: item.slug,
-      path: `/MadeIn/${item.slug}`,
-      id: item.id,
-    })) || [];
+  const madeInItems: MadeInItem[] = data?.allMadeInEM?.nodes?.map((item: MadeInNode) => ({
+    title: item.title,
+    slug: item.slug,
+    path: `/MadeIn/${item.slug}`,
+    id: item.id,
+  })) || [];
 
-  const renderMadeInItem = (
-    item: MadeInItem,
-    index: number,
-    totalItems: number
-  ) => {
+  const renderMadeInItem = (item: MadeInItem, index: number, totalItems: number) => {
     const isActive = pathname === item.path;
 
-    const handleClick = (e: React.MouseEvent) => {
-      e.stopPropagation();
+    const handleClick =  () => {
       if (isNavigating || pathname === item.path) return;
 
       setIsNavigating(true);
 
-      // Use startTransition for smoother navigation
-      startTransition(() => {
-        if (setExpanded) setExpanded(false);
-        router.push(item.path);
-      });
+      if (setExpanded) {
+        setExpanded(false);
+      }
 
-      // Reset navigation state after a short delay
-      setTimeout(() => setIsNavigating(false), 300);
+      router.push(item.path);
+
+      setIsNavigating(false);
+
     };
 
     return (
@@ -79,24 +73,18 @@ export default function MadeIn({
         className={`
           group relative flex items-center gap-3 cursor-pointer px-5 
           transition-all duration-200 ease-in-out
-          ${isNavigating ? "opacity-50 pointer-events-none" : "opacity-100"}
+          ${isNavigating ? 'opacity-50 pointer-events-none' : 'opacity-100'}
           ${index === totalItems - 1 ? "pb-4" : ""}
         `}
-        onMouseEnter={() => router.prefetch(item.path)} // Prefetch route on hover
         onClick={handleClick}
       >
-        <p className={`font-semibold ${isActive ? "text-[#E0643A]" : ""}`}>
+        <p className={`font-semibold ${isActive ? 'text-[#E0643A]' : ''}`}>
           {item.title}
         </p>
         <div className="absolute top-0 right-0 h-full bg-[#E0643A] rounded-l-[10px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 w-[5px]"></div>
       </div>
     );
   };
-
-  // Reset navigation state when pathname changes
-  useEffect(() => {
-    setIsNavigating(false);
-  }, [pathname]);
 
   const hasData = !loading && !error && madeInItems.length > 0;
   const effectiveIsExpanded = hasData ? isExpanded : false;
@@ -113,7 +101,6 @@ export default function MadeIn({
       isExpanded={effectiveIsExpanded}
       setExpanded={setExpanded}
       isMenuOpen={isMenuOpen}
-      navigationState={{ isNavigating, targetPath: pathname }}
     />
   );
 }

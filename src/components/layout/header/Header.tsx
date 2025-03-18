@@ -73,8 +73,10 @@ export default function Header() {
     if (newMenuState) {
       setIsExpertiseExpanded(true);
       setIsMadeInExpanded(true);
+      
     } else {
       // When closing, reset to previous states
+    
       setIsExpertiseExpanded(false);
       setIsMadeInExpanded(false);
     }
@@ -83,6 +85,7 @@ export default function Header() {
   const handleCloseMenu = () => {
     setIsMenuOpen(false);
     document.body.classList.remove("menu-open");
+ 
     setIsExpertiseExpanded(false);
     setIsMadeInExpanded(false);
   };
@@ -99,10 +102,12 @@ export default function Header() {
 
   const handleExpertiseToggle = (expanded: boolean) => {
     setIsExpertiseExpanded(expanded);
+   
   };
 
   const handleMadeInToggle = (expanded: boolean) => {
     setIsMadeInExpanded(expanded);
+    
   };
 
   return (
