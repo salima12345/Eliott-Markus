@@ -52,7 +52,7 @@ export default function MadeIn({
   const renderMadeInItem = (item: MadeInItem, index: number, totalItems: number) => {
     const isActive = pathname === item.path;
 
-    const handleClick = async () => {
+    const handleClick =  () => {
       if (isNavigating || pathname === item.path) return;
 
       setIsNavigating(true);
@@ -61,7 +61,6 @@ export default function MadeIn({
         setExpanded(false);
       }
 
-      await new Promise(resolve => setTimeout(resolve, 150));
       router.push(item.path);
 
       setTimeout(() => {
