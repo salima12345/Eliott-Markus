@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import ExpandableSection from "./ExpandableSection";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
-import { useQuery } from '@apollo/client';
+import { useRouter, usePathname } from "next/navigation";
+import { useQuery } from "@apollo/client";
 import { GET_EXPERTISES } from "@/lib/graphql/queries/ExpertiseQuery";
 
 interface ExpertiseItem {
@@ -16,6 +17,7 @@ interface ExpertiseItem {
 interface ExpertiseProps {
   defaultExpanded?: boolean;
   pushContent?: boolean;
+  isHeader?: boolean;
   isExpanded?: boolean;
   setExpanded?: (expanded: boolean) => void;
   isMenuOpen?: boolean;
@@ -35,6 +37,7 @@ interface ExpertiseNode {
 export default function Expertise({
   defaultExpanded = false,
   pushContent = false,
+  isHeader = false,
   isExpanded,
   setExpanded,
   isMenuOpen = false,
@@ -45,38 +48,35 @@ export default function Expertise({
 
   const { data, loading, error } = useQuery(GET_EXPERTISES);
 
-  const expertises: ExpertiseItem[] = data?.expertises?.nodes?.map((expertise: ExpertiseNode) => ({
-    icon: expertise.featuredImage?.node?.sourceUrl || "/images/expertises/icons/default.svg",
-    text: expertise.title,
-    path: `/Expertise/${expertise.slug}`,
-    expertiseId: expertise.expertiseId
-  })) || [];
+  const expertises: ExpertiseItem[] =
+    data?.expertises?.nodes?.map((expertise: ExpertiseNode) => ({
+      icon: expertise.featuredImage?.node?.sourceUrl || "/images/expertises/icons/default.svg",
+      text: expertise.title,
+      path: `/Expertise/${expertise.slug}`,
+      expertiseId: expertise.expertiseId,
+    })) || [];
 
-  const renderExpertiseItem = (item: ExpertiseItem, index: number, totalItems: number) => {
+  const renderExpertiseItem = (
+    item: ExpertiseItem,
+    index: number,
+    totalItems: number
+  ) => {
     const isActive = pathname === item.path;
 
-    const handleClick =  () => {
+    const handleClick = (e: React.MouseEvent) => {
+      e.stopPropagation();
       if (isNavigating || pathname === item.path) return;
-
+    
       setIsNavigating(true);
-
-      if (setExpanded) {
-        setExpanded(false);
-      }
-
       router.push(item.path);
-      setIsNavigating(false);
-
-
     };
-
     return (
       <div
         key={index}
         className={`
           flex items-center gap-3 cursor-pointer px-5 
           transition-all duration-200 ease-in-out
-          ${isNavigating ? 'opacity-50 pointer-events-none' : 'opacity-100'}
+          ${isNavigating ? "opacity-50 pointer-events-none" : "opacity-100"}
           ${index === totalItems - 1 ? "pb-4" : ""}
         `}
         onClick={handleClick}
@@ -86,8 +86,8 @@ export default function Expertise({
             src={item.icon}
             alt={item.text}
             fill
-            className={`transition-transform duration-200 ${isActive ? 'scale-110' : ''}`}
-            style={{ objectFit: 'contain' }}
+            className={`transition-transform duration-200 ${isActive ? "scale-110" : ""}`}
+            style={{ objectFit: "contain" }}
           />
         </div>
         <p className={`font-medium transition-colors duration-200`}>
@@ -96,6 +96,10 @@ export default function Expertise({
       </div>
     );
   };
+
+  useEffect(() => {
+    setIsNavigating(false); // Reset navigation state on pathname change
+  }, [pathname]);
 
   const hasData = !loading && !error && expertises.length > 0;
   const effectiveIsExpanded = hasData ? isExpanded : false;
@@ -108,9 +112,11 @@ export default function Expertise({
       testId="expertise"
       defaultExpanded={defaultExpanded}
       pushContent={pushContent}
+      isHeader={isHeader}
       isExpanded={effectiveIsExpanded}
       setExpanded={setExpanded}
       isMenuOpen={isMenuOpen}
+      navigationState={{ isNavigating, targetPath: pathname }}
     />
   );
 }
