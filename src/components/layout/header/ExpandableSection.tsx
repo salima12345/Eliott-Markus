@@ -17,6 +17,10 @@ interface ExpandableSectionProps<T> {
   isExpanded?: boolean;
   setExpanded?: (expanded: boolean) => void;
   isMenuOpen?: boolean;
+  navigationState?: {
+    isNavigating: boolean;
+    targetPath: string;
+  };
 }
 
 function ExpandableSection<T>({
@@ -31,6 +35,7 @@ function ExpandableSection<T>({
   isExpanded: parentExpanded,
   setExpanded: parentSetExpanded,
   isMenuOpen = false,
+  navigationState = { isNavigating: false, targetPath: "" },
 }: ExpandableSectionProps<T>): React.JSX.Element {
   const { theme } = useTheme();
   const pathname = usePathname();
@@ -39,28 +44,21 @@ function ExpandableSection<T>({
   const [hasScrolled, setHasScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [isUserToggled, setIsUserToggled] = useState(false);
-  const [previousPathname, setPreviousPathname] = useState(pathname);
-  const [isNavigating, setIsNavigating] = useState(false);
 
   const isControlled = parentExpanded !== undefined && parentSetExpanded !== undefined;
   const isExpanded = isControlled ? parentExpanded : localIsExpanded;
 
-  useEffect(() => {
-    if (pathname !== previousPathname) {
-      setIsNavigating(true);
-      setPreviousPathname(pathname);
-    } else {
-      setIsNavigating(false);
-    }
-  }, [pathname, previousPathname]);
-
-  const handleAutoExpand = useCallback((shouldExpand: boolean) => {
-    if (isControlled) {
-      parentSetExpanded(shouldExpand);
-    } else {
-      setLocalIsExpanded(shouldExpand);
-    }
-  }, [isControlled, parentSetExpanded]);
+  const handleAutoExpand = useCallback(
+    (shouldExpand: boolean) => {
+      if (navigationState.isNavigating) return; // Skip if navigating
+      if (isControlled) {
+        parentSetExpanded(shouldExpand);
+      } else {
+        setLocalIsExpanded(shouldExpand);
+      }
+    },
+    [isControlled, parentSetExpanded, navigationState.isNavigating]
+  );
 
   useEffect(() => {
     setMounted(true);
@@ -108,7 +106,7 @@ function ExpandableSection<T>({
 
   const toggleExpand = (e: React.MouseEvent) => {
     const clickedElement = e.target as HTMLElement;
-    if (clickedElement.closest('a') || clickedElement.closest('link')) {
+    if (clickedElement.closest("a") || clickedElement.closest("link") || navigationState.isNavigating) {
       return;
     }
 
@@ -127,7 +125,7 @@ function ExpandableSection<T>({
         className={`${
           pushContent ? "" : "absolute z-[50]"
         } xl:w-[287px] w-full overflow-hidden rounded-[26px] transition-colors duration-300
-        ${theme === 'dark' ? 'bg-grayDark text-white' : 'bg-[#E6E5DF] text-black'}
+        ${theme === "dark" ? "bg-grayDark text-white" : "bg-[#E6E5DF] text-black"}
         ${className}`}
         style={{
           zIndex: isExpanded ? 10 : "auto",
@@ -136,18 +134,18 @@ function ExpandableSection<T>({
       >
         <button
           className={`w-full h-[56px] px-6 py-4 flex items-center justify-between cursor-pointer
-          ${theme ==='dark' ? 'bg-grayDark text-white' : 'bg-[#E6E5DF] text-black'}`}
+          ${theme === "dark" ? "bg-grayDark text-white" : "bg-[#E6E5DF] text-black"}`}
           aria-expanded={isExpanded}
           aria-controls={`${testId}-content`}
         >
           <p>{title}</p>
           <Image
-            src={theme === 'dark' ? "/images/icons/arrow-circle.svg" : "/images/icons/arrow-circle-black.svg"}
+            src={theme === "dark" ? "/images/icons/arrow-circle.svg" : "/images/icons/arrow-circle-black.svg"}
             width={16}
             height={16}
             className={`transform ${isExpanded ? "rotate-180" : ""}`}
             style={{
-              transition: isNavigating ? "none" : "transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)",
+              transition: navigationState.isNavigating ? "none" : "transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)",
             }}
             alt={isExpanded ? "Collapse" : "Expand"}
             priority={true}
@@ -161,24 +159,26 @@ function ExpandableSection<T>({
             maxHeight: isExpanded ? `${items.length * 50 + 20}px` : "0px",
             opacity: isExpanded ? 1 : 0,
             visibility: isExpanded ? "visible" : "hidden",
-            transition: isNavigating 
+            transition: navigationState.isNavigating
               ? "none"
               : `
                 max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1),
                 opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
                 visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1)
               `,
-            pointerEvents: isExpanded ? "auto" : "none"
+            pointerEvents: isExpanded ? "auto" : "none",
           }}
           onClick={(e) => e.stopPropagation()}
         >
           {items.map((item, index) =>
             renderItem ? (
-              renderItem(item, index, items.length)
+              <div key={index} data-nav-item>
+                {renderItem(item, index, items.length)}
+              </div>
             ) : (
               <div
                 key={index}
-                className={`px-5 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}
+                className={`px-5 ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}
               >
                 {JSON.stringify(item)}
               </div>
