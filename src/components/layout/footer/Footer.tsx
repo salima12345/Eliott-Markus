@@ -24,7 +24,7 @@ function Footer({
 
   return (
     <footer className="relative w-full">
-      <div className="container mt-10">
+      <div className="container mt-10 mb-5">
         <div className="flex items-center justify-between pb-5 xl:pb-8">
           <div>
             <AnimatedTitle
