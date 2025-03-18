@@ -16,7 +16,6 @@ interface MadeInItem {
 interface MadeInProps {
   defaultExpanded?: boolean;
   pushContent?: boolean;
-  isHeader?: boolean;
   isExpanded?: boolean;
   setExpanded?: (expanded: boolean) => void;
   isMenuOpen?: boolean;
@@ -31,7 +30,6 @@ interface MadeInNode {
 export default function MadeIn({
   defaultExpanded = false,
   pushContent = false,
-  isHeader = false,
   isExpanded,
   setExpanded,
   isMenuOpen = false,
@@ -97,7 +95,6 @@ export default function MadeIn({
       testId="made-in"
       defaultExpanded={defaultExpanded}
       pushContent={pushContent}
-      isHeader={isHeader}
       isExpanded={effectiveIsExpanded}
       setExpanded={setExpanded}
       isMenuOpen={isMenuOpen}

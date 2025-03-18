@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState, ReactNode } from "react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { useTheme } from "@/lib/themes";
 
 interface ExpandableSectionProps<T> {
@@ -13,7 +12,6 @@ interface ExpandableSectionProps<T> {
   testId?: string;
   defaultExpanded?: boolean;
   pushContent?: boolean;
-  isHeader?: boolean;
   isExpanded?: boolean;
   setExpanded?: (expanded: boolean) => void;
   isMenuOpen?: boolean;
@@ -31,14 +29,12 @@ function ExpandableSection<T>({
   testId,
   defaultExpanded = false,
   pushContent = false,
-  isHeader = false,
   isExpanded: parentExpanded,
   setExpanded: parentSetExpanded,
   isMenuOpen = false,
   navigationState = { isNavigating: false, targetPath: '' },
 }: ExpandableSectionProps<T>): React.JSX.Element {
   const { theme } = useTheme();
-  const pathname = usePathname();
   const [localIsExpanded, setLocalIsExpanded] = useState(defaultExpanded);
   const [mounted, setMounted] = useState(false);
 

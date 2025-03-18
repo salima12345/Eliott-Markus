@@ -139,14 +139,12 @@ export default function Header() {
                   </Link>
                   <div className="hidden [@media(min-width:1190px)]:flex items-center gap-5 ml-[44px] 2xl:ml-[88px]">
                     <Expertise
-                      isHeader={true}
                       isExpanded={isExpertiseExpanded}
                       setExpanded={handleExpertiseToggle}
                       defaultExpanded={false}
                       isMenuOpen={isMenuOpen}
                     />
                     <MadeIn
-                      isHeader={true}
                       isExpanded={isMadeInExpanded}
                       setExpanded={handleMadeInToggle}
                       defaultExpanded={false}

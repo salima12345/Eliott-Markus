@@ -16,7 +16,6 @@ interface ExpertiseItem {
 interface ExpertiseProps {
   defaultExpanded?: boolean;
   pushContent?: boolean;
-  isHeader?: boolean;
   isExpanded?: boolean;
   setExpanded?: (expanded: boolean) => void;
   isMenuOpen?: boolean;
@@ -36,7 +35,6 @@ interface ExpertiseNode {
 export default function Expertise({
   defaultExpanded = false,
   pushContent = false,
-  isHeader = false,
   isExpanded,
   setExpanded,
   isMenuOpen = false,
@@ -110,7 +108,6 @@ export default function Expertise({
       testId="expertise"
       defaultExpanded={defaultExpanded}
       pushContent={pushContent}
-      isHeader={isHeader}
       isExpanded={effectiveIsExpanded}
       setExpanded={setExpanded}
       isMenuOpen={isMenuOpen}
