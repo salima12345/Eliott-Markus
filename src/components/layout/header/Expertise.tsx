@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import ExpandableSection from "./ExpandableSection";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
@@ -46,6 +46,7 @@ export default function Expertise({
   const router = useRouter();
   const pathname = usePathname();
   const [isNavigating, setIsNavigating] = useState(false);
+  const [prefetched, setPrefetched] = useState(false);
 
   const { data, loading, error } = useQuery(GET_EXPERTISES);
 
@@ -57,18 +58,18 @@ export default function Expertise({
       expertiseId: expertise.expertiseId,
     })) || [];
 
-  // Prefetch des routes au montage ou au changement de données
-  useEffect(() => {
-    expertises.forEach((item) => {
-      router.prefetch(item.path);
-    });
-  }, [expertises, router]);
+  // Précharge les routes au hover ou au touch
+  const handleHover = useCallback((path: string) => {
+    if (!prefetched) {
+      router.prefetch(path);
+      setPrefetched(true);
+    }
+  }, [prefetched, router]);
 
   const handleClick = (e: React.MouseEvent, item: ExpertiseItem) => {
     e.stopPropagation();
     if (isNavigating || pathname === item.path) return;
 
-    // Démarre une transition React pour prioriser le rendu
     startTransition(() => {
       setIsNavigating(true);
       router.push(item.path);
@@ -85,6 +86,8 @@ export default function Expertise({
     return (
       <div
         key={index}
+        onMouseEnter={() => handleHover(item.path)}
+        onTouchStart={() => handleHover(item.path)}
         className={`
           flex items-center gap-3 cursor-pointer px-5 
           transition-all duration-200 ease-in-out

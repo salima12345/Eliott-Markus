@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import ExpandableSection from "./ExpandableSection";
 import { useQuery } from "@apollo/client";
@@ -40,6 +40,7 @@ export default function MadeIn({
   const router = useRouter();
   const pathname = usePathname();
   const [isNavigating, setIsNavigating] = useState(false);
+  const [prefetched, setPrefetched] = useState(false);
 
   const { data, loading, error } = useQuery(GET_ALL_MADE_IN);
 
@@ -51,18 +52,18 @@ export default function MadeIn({
       id: item.id,
     })) || [];
 
-  // Prefetch des routes au montage ou au changement de données
-  useEffect(() => {
-    madeInItems.forEach((item) => {
-      router.prefetch(item.path);
-    });
-  }, [madeInItems, router]);
+  // Précharge les routes au hover ou au touch
+  const handleHover = useCallback((path: string) => {
+    if (!prefetched) {
+      router.prefetch(path);
+      setPrefetched(true);
+    }
+  }, [prefetched, router]);
 
   const handleClick = (e: React.MouseEvent, item: MadeInItem) => {
     e.stopPropagation();
     if (isNavigating || pathname === item.path) return;
 
-    // Démarre une transition React pour prioriser le rendu
     startTransition(() => {
       setIsNavigating(true);
       router.push(item.path);
@@ -79,6 +80,8 @@ export default function MadeIn({
     return (
       <div
         key={index}
+        onMouseEnter={() => handleHover(item.path)}
+        onTouchStart={() => handleHover(item.path)}
         className={`
           group relative flex items-center gap-3 cursor-pointer px-5 
           transition-all duration-200 ease-in-out
@@ -96,7 +99,7 @@ export default function MadeIn({
   };
 
   useEffect(() => {
-    setIsNavigating(false); 
+    setIsNavigating(false);
   }, [pathname]);
 
   const hasData = !loading && !error && madeInItems.length > 0;

@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { usePathname } from "next/navigation";
+import { usePathname,useRouter } from "next/navigation";
 import { useTheme } from "@/lib/themes";
 import LanguageSelector from "./LanguageSelectorDesktop";
 import LanguageSelectorMobile from "./LanguagesSelectorMobile";
@@ -17,6 +17,7 @@ import { Menu, X } from "lucide-react";
 
 export default function Header() {
   const pathname = usePathname();
+  const router=useRouter();
   const { theme } = useTheme();
 
   const [headerVisible, setHeaderVisible] = useState(true);
@@ -25,15 +26,20 @@ export default function Header() {
   const [isExpertiseExpanded, setIsExpertiseExpanded] = useState(false);
   const [isMadeInExpanded, setIsMadeInExpanded] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+ // Précharge les routes critiques au montage
+ useEffect(() => {
+  router.prefetch("/Expertise/[slug]");
+  router.prefetch("/MadeIn/[slug]");
+}, [router]);
 
-  // Reset menu state when pathname changes
-  useEffect(() => {
-    setIsMenuOpen(false);
-    setIsModalOpen(false);
-    setIsExpertiseExpanded(false);
-    setIsMadeInExpanded(false);
-    document.body.classList.remove("menu-open");
-  }, [pathname]);
+// Reset menu state when pathname changes
+useEffect(() => {
+  setIsMenuOpen(false);
+  setIsModalOpen(false);
+  setIsExpertiseExpanded(false);
+  setIsMadeInExpanded(false);
+  document.body.classList.remove("menu-open");
+}, [pathname]);
 
   // Modified scroll handler with useCallback
   const handleScroll = useCallback(() => {
