@@ -48,6 +48,7 @@ function AboutTop() {
         <motion.h1
           initial={{ y: "100%", opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1, ease: [0.33, 1, 0.68, 1] }}
           className="font-semibold leading-tight text-[56px] md:text-[60px] xl:text-[80px]"
         >
           {titleText}
@@ -59,6 +60,7 @@ function AboutTop() {
           <motion.p
             initial={{ y: "100%", opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1, ease: [0.33, 1, 0.68, 1] }}
             className="font-semibold text-[20px] sm:text-[24px] xl:text-[26px]"
           >
             {homeData.descriptionHero}
