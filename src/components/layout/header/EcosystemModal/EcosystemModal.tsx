@@ -125,18 +125,18 @@ export default function EcosystemModal({ onClose }: EcosystemModalProps) {
 
   const modalContent = (
     <motion.div
-      className="fixed  inset-0 w-screen min-h-screen bg-black bg-opacity-60 backdrop-blur-sm z-[50] overflow-auto px-5 py-1"
+      className="fixed inset-0 w-screen min-h-screen bg-black bg-opacity-60 backdrop-blur-sm z-[50] overflow-auto flex justify-center items-center px-5 py-1"
       initial="hidden"
       animate="visible"
       exit="hidden"
       variants={containerVariants}
     >
-      <div className="absolute top-4 right-4 ml-5 z-[9999]">
+      <div className="absolute top-4 right-4 z-[9999]">
         <Button Icon={X} altText="Close" onClick={onClose} />
       </div>
 
       <motion.div
-        className="container mx-auto  h-full flex flex-col items-center justify-center py-10 gap-3 mt-12 3xl:mt-0"
+        className="container mx-auto h-full flex flex-col py-10 gap-3"
         variants={containerVariants}
       >
         <motion.div
