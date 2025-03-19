@@ -25,9 +25,7 @@ module.exports = {
         'dark-primary': '#000000',
         'light-primary': '#f2f1ef'
       },
-      fontFamily: {
-        gilroy: ["Gilroy", "sans-serif"],
-      },
+    
     },
   },
   plugins: [
