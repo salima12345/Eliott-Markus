@@ -136,11 +136,11 @@ export default function EcosystemModal({ onClose }: EcosystemModalProps) {
       </div>
 
       <motion.div
-        className="container mx-auto h-full flex flex-col py-10 gap-3 mt-12 3xl:mt-0"
+        className="container mx-auto  h-full flex flex-col items-center justify-center py-10 gap-3 mt-12 3xl:mt-0"
         variants={containerVariants}
       >
         <motion.div
-          className="flex flex-col xl:flex-row justify-between items-center gap-3"
+          className="flex flex-col xl:flex-row justify-between gap-3"
           variants={itemVariants}
         >
           {/* First column/row */}
