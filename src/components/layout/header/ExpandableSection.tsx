@@ -154,7 +154,7 @@ function ExpandableSection<T>({
 
         <div
           id={`${testId}-content`}
-          className="flex flex-col gap-5 origin-top"
+          className="flex flex-col gap-3 origin-top"
           style={{
             maxHeight: isExpanded ? `${items.length * 50 + 20}px` : "0px",
             opacity: isExpanded ? 1 : 0,
