@@ -53,7 +53,7 @@ interface QueryResult {
 export default function EcosystemModal({ onClose }: EcosystemModalProps) {
   const { data, loading, error } = useQuery<QueryResult>(GET_ECOSYSTEM_DATA);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p></p>;
   if (error) return <p>Error: {error.message}</p>;
 
   const ecosystemData = data?.options?.ecosystem;
@@ -125,7 +125,7 @@ export default function EcosystemModal({ onClose }: EcosystemModalProps) {
 
   const modalContent = (
     <motion.div
-      className="fixed inset-0 w-screen h-screen bg-black bg-opacity-50 backdrop-blur-sm z-[50] overflow-auto px-5 py-1"
+      className="fixed inset-0 w-screen h-screen bg-black bg-opacity-60 backdrop-blur-sm z-[50] overflow-auto px-5 py-1"
       initial="hidden"
       animate="visible"
       exit="hidden"
