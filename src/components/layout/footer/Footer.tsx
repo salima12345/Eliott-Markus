@@ -19,7 +19,7 @@ function Footer({
   const router = useRouter(); 
 
   const handleButtonClick = () => {
-    router.push('/contact'); 
+    router.push('/Contact'); 
   };
 
   return (
