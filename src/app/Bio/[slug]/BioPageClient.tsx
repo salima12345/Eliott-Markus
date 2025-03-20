@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import AnimatedTitle from "@/components/ui/TitleReveal";
 import Footer from "@/components/layout/footer";
+import Header from "@/components/layout/header";
 
 interface Member {
   id: string;
@@ -43,6 +44,7 @@ const BioPageClient: React.FC<BioPageClientProps> = ({ member }) => {
 
   return (
     <>
+    <Header/>
       <div className="flex flex-col my-16">
         <div className="w-full max-w-[1200px] mx-auto px-4">
           <div className="flex flex-col xl:flex-row justify-end gap-16">

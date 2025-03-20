@@ -6,6 +6,7 @@ import CaseStudy from '@/components/CaseStudy';
 import Footer from '@/components/layout/footer';
 import { GET_EXPERTISES } from '@/lib/graphql/queries/ExpertiseQuery';
 import { GET_REFERENCES } from '@/lib/graphql/queries/ReferenceQueries';
+import Header from '@/components/layout/header';
 
 type FeaturedImage = {
   node: {
@@ -151,6 +152,7 @@ function References() {
 
   return (
     <>
+    <Header/>
       <div className="min-h-screen container relative px-10 ">
         {/* Header with search and categories */}
         <div

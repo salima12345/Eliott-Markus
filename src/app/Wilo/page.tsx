@@ -8,6 +8,7 @@ import Footer from "@/components/layout/footer";
 import { useQuery } from '@apollo/client';
 import {  GET_ARTICLES } from '@/lib/graphql/queries/WilloQueries';
 import { GET_CATEGORIES } from "@/lib/graphql/queries/WilloQueries";
+import Header from "@/components/layout/header";
 
 interface Category {
   id: string;
@@ -75,6 +76,7 @@ const sortedArticles = [...articles].sort((a, b) => {
 
   return (
     <>
+    <Header/>
       <div className="container mx-auto px-4 mt-16">
         <div className="flex flex-col md:flex-row gap-24">
           {/* Category Filters */}

@@ -11,6 +11,7 @@ import type Lenis from "@studio-freight/lenis/types";
 import { useQuery } from "@apollo/client";
 import { GET_TALENTS_PAGE, GET_TALENTS } from "@/lib/graphql/queries/TalentsQueries";
 import { GET_EXPERTISES } from "@/lib/graphql/queries/ExpertiseQuery";
+import Header from "@/components/layout/header";
 
 type Talent = {
   id: string;
@@ -148,6 +149,7 @@ const Team = () => {
   }
   return (
     <>
+    <Header/>
       <motion.div
         className="fixed top-0 left-0 right-0 h-1  z-50 origin-left"
         style={{ scaleX }}

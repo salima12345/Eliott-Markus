@@ -12,6 +12,7 @@ import { MoveVertical } from 'lucide-react';
 import { type CaseStudy } from '@/Data/CaseStudiesData';
 import { TeamMember } from '@/Data/TeamData';
 import { useRouter } from 'next/navigation';
+import Header from '@/components/layout/header';
 
 interface ServiceItemProps {
   number: string;
@@ -105,6 +106,7 @@ const ExpertisePageClient: React.FC<ExpertisePageClientProps> = ({
 
   return (
     <>
+    <Header/>
       <div className="container py-8">
         <div className="flex flex-col gap-10 xl:flex-row xl:items-center xl:justify-between">
           <div className="flex flex-col gap-4">

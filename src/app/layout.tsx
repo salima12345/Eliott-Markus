@@ -23,7 +23,6 @@ export default function RootLayout({
         <ApolloWrapper> {/* Wrap content in ApolloWrapper */}
           <ThemeProvider>
             <div className="flex flex-col min-h-screen transition-colors duration-200">
-              <Header />
               <SmoothScroll>
                 <main className="flex-grow">{children}</main>
               </SmoothScroll>

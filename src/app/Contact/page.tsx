@@ -18,6 +18,7 @@ import { Expertise as ExpertiseType } from './components/Expertise';
 import { Expertise as MadeInType } from './components/MadeIn';
 import { Subject } from '@/types/enums';
 import { CF7_FORM_IDS } from '@/utils/config';
+import Header from '@/components/layout/header';
 
 interface SubmitStatus {
   success?: boolean;
@@ -136,6 +137,8 @@ const Contact: React.FC = () => {
   };
 
   return (
+    <>
+    <Header/>
     <div className="container mx-auto px-4 min-h-screen mt-16">
       {submitStatus.message && (
         <div
@@ -363,6 +366,7 @@ const Contact: React.FC = () => {
         {errors.agree && <p className="text-xs text-red-500 mt-2">{errors.agree.message}</p>}
       </div>
     </div>
+    </>
   );
 };
 

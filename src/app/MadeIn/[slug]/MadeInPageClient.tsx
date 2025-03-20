@@ -7,6 +7,7 @@ import Button from '@/components/ui/Button';
 import Footer from '@/components/layout/footer';
 import { MoveVertical } from 'lucide-react';
 import parse from 'html-react-parser';
+import Header from '@/components/layout/header';
 
 interface Service {
   title: string;
@@ -64,6 +65,7 @@ const MadeInPageClient: React.FC<{ content: PageContent }> = ({ content }) => {
 
   return (
     <>
+    <Header/>
       <div className="py-8 mt-10">
         <div className="container flex items-end justify-between">
           <div className="flex flex-col gap-4">

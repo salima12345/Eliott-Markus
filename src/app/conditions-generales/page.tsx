@@ -2,6 +2,7 @@ import React from 'react';
 import { GET_PAGE_BY_TITLE } from '@/lib/graphql/queries/PagesQueries';
 import client from '@/lib/apollo-client';
 import PageClient from '@/components/PageClient';
+import Header from '@/components/layout/header';
 export default async function ConditionsGenerales() {
   const { data } = await client.query({
     query: GET_PAGE_BY_TITLE,
@@ -15,9 +16,12 @@ export default async function ConditionsGenerales() {
   }
 
   return (
+    <>
+    <Header/>
     <PageClient
       title={page.title}
       content={page.content}
     />
+    </>
   );
 }

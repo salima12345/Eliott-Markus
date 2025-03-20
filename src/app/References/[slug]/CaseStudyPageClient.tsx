@@ -6,6 +6,7 @@ import Link from "next/link";
 import Footer from "@/components/layout/footer";
 import Share from "@/components/Share";
 import parse from 'html-react-parser';
+import Header from "@/components/layout/header";
 
 interface GalleryItem {
   description: string;
@@ -70,6 +71,7 @@ const ReferencePageClient: React.FC<ReferencePageClientProps> = ({
 
   return (
     <>
+    <Header/>
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

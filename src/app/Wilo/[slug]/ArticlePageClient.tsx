@@ -12,6 +12,7 @@ import Share from "@/components/Share";
 import parse from 'html-react-parser';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Header from '@/components/layout/header';
 
 const hashSlug = (slug: string) => {
   let hash = 0;
@@ -135,6 +136,7 @@ const ArticlePageClient: React.FC<ArticlePageClientProps> = ({ article, relatedA
 
   return (
     <>
+    <Header/>
       <div className="container mt-16 mx-auto flex flex-col xl:flex-row gap-8 xl:gap-24">
         <motion.div 
           className="max-h-[80px]"
