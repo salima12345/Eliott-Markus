@@ -22,6 +22,7 @@ interface ExpertiseProps {
   isExpanded?: boolean;
   setExpanded?: (expanded: boolean) => void;
   isMenuOpen?: boolean;
+  onDataLoaded?: () => void; // New prop
 }
 
 interface ExpertiseNode {
@@ -42,6 +43,7 @@ export default function Expertise({
   isExpanded,
   setExpanded,
   isMenuOpen = false,
+  onDataLoaded,
 }: ExpertiseProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -57,6 +59,13 @@ export default function Expertise({
       path: `/Expertise/${expertise.slug}`,
       expertiseId: expertise.expertiseId,
     })) || [];
+
+  // Notify parent when data is loaded
+  useEffect(() => {
+    if (!loading && !error && data?.expertises?.nodes) {
+      onDataLoaded?.();
+    }
+  }, [loading, error, data, onDataLoaded]);
 
   // Précharge les routes au hover ou au touch
   const handleHover = useCallback((path: string) => {

@@ -21,6 +21,7 @@ interface MadeInProps {
   isExpanded?: boolean;
   setExpanded?: (expanded: boolean) => void;
   isMenuOpen?: boolean;
+  onDataLoaded?: () => void; // New prop
 }
 
 interface MadeInNode {
@@ -36,6 +37,7 @@ export default function MadeIn({
   isExpanded,
   setExpanded,
   isMenuOpen = false,
+  onDataLoaded,
 }: MadeInProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -51,6 +53,13 @@ export default function MadeIn({
       path: `/MadeIn/${item.slug}`,
       id: item.id,
     })) || [];
+
+  // Notify parent when data is loaded
+  useEffect(() => {
+    if (!loading && !error && data?.allMadeInEM?.nodes) {
+      onDataLoaded?.();
+    }
+  }, [loading, error, data, onDataLoaded]);
 
   // Précharge les routes au hover ou au touch
   const handleHover = useCallback((path: string) => {

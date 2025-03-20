@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { usePathname,useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "@/lib/themes";
 import LanguageSelector from "./LanguageSelectorDesktop";
 import LanguageSelectorMobile from "./LanguagesSelectorMobile";
@@ -17,7 +17,7 @@ import { Menu, X } from "lucide-react";
 
 export default function Header() {
   const pathname = usePathname();
-  const router=useRouter();
+  const router = useRouter();
   const { theme } = useTheme();
 
   const [headerVisible, setHeaderVisible] = useState(true);
@@ -26,32 +26,48 @@ export default function Header() {
   const [isExpertiseExpanded, setIsExpertiseExpanded] = useState(false);
   const [isMadeInExpanded, setIsMadeInExpanded] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
- // Précharge les routes critiques au montage
- useEffect(() => {
-  router.prefetch("/Expertise/[slug]");
-  router.prefetch("/MadeIn/[slug]");
-}, [router]);
+  const [expertiseDataLoaded, setExpertiseDataLoaded] = useState(false);
+  const [madeInDataLoaded, setMadeInDataLoaded] = useState(false);
 
-// Reset menu state when pathname changes
-useEffect(() => {
-  setIsMenuOpen(false);
-  setIsModalOpen(false);
-  setIsExpertiseExpanded(false);
-  setIsMadeInExpanded(false);
-  document.body.classList.remove("menu-open");
-}, [pathname]);
+  // Précharge les routes critiques au montage
+  useEffect(() => {
+    router.prefetch("/Expertise/[slug]");
+    router.prefetch("/MadeIn/[slug]");
+  }, [router]);
 
-  // Modified scroll handler with useCallback
+  // Reset menu state when pathname changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+    setIsModalOpen(false);
+    setIsExpertiseExpanded(false);
+    setIsMadeInExpanded(false);
+    document.body.classList.remove("menu-open");
+  }, [pathname]);
+
+  // Synchronize expansion when both datasets are loaded
+  useEffect(() => {
+    if (expertiseDataLoaded && madeInDataLoaded && pathname === "/" && window.scrollY === 0) {
+      // Ajouter un délai de 500ms avant l'expansion
+      const delay = 500; // Délai en millisecondes
+      const timeoutId = setTimeout(() => {
+        setIsExpertiseExpanded(true);
+        setIsMadeInExpanded(true);
+      }, delay);
+
+      // Nettoyer le timeout si le composant est démonté
+      return () => clearTimeout(timeoutId);
+    }
+  }, [expertiseDataLoaded, madeInDataLoaded, pathname]);
+
+  // Scroll handler
   const handleScroll = useCallback(() => {
     const currentScrollY = window.scrollY;
 
-    // If menu is open, always show header
     if (isMenuOpen) {
       setHeaderVisible(true);
       return;
     }
 
-    // Only update header visibility when menu is closed
     if (currentScrollY > 150) {
       setHeaderVisible(currentScrollY < lastScrollY);
     } else {
@@ -142,16 +158,18 @@ useEffect(() => {
                     <Expertise
                       isHeader={true}
                       isExpanded={isExpertiseExpanded}
-                      setExpanded={handleExpertiseToggle}
+                      setExpanded={setIsExpertiseExpanded}
                       defaultExpanded={false}
                       isMenuOpen={isMenuOpen}
+                      onDataLoaded={() => setExpertiseDataLoaded(true)}
                     />
                     <MadeIn
                       isHeader={true}
                       isExpanded={isMadeInExpanded}
-                      setExpanded={handleMadeInToggle}
+                      setExpanded={setIsMadeInExpanded}
                       defaultExpanded={false}
                       isMenuOpen={isMenuOpen}
+                      onDataLoaded={() => setMadeInDataLoaded(true)}
                     />
                     <EcosystemDropMenu
                       isOpen={isMenuOpen}
