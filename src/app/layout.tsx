@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import { ThemeProvider } from "@/lib/themes";
-import Header from "@/components/layout/header";
 import ApolloWrapper from "@/components/ApolloWrapper";
 
 export const metadata: Metadata = {
