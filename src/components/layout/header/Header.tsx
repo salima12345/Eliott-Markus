@@ -119,13 +119,7 @@ export default function Header() {
     setIsModalOpen(false);
   };
 
-  const handleExpertiseToggle = (expanded: boolean) => {
-    setIsExpertiseExpanded(expanded);
-  };
 
-  const handleMadeInToggle = (expanded: boolean) => {
-    setIsMadeInExpanded(expanded);
-  };
 
   return (
     <>
