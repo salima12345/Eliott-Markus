@@ -4,8 +4,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import ExpandableSection from "./ExpandableSection";
 import { useQuery } from "@apollo/client";
-import { GET_ALL_MADE_IN } from "@/lib/graphql/queries/MadeInQueries";
 import { startTransition } from "react";
+import { GET_ALL_MADE_IN_MENU } from "@/lib/graphql/queries/MadeInQueries";
 
 interface MadeInItem {
   title: string;
@@ -21,7 +21,7 @@ interface MadeInProps {
   isExpanded?: boolean;
   setExpanded?: (expanded: boolean) => void;
   isMenuOpen?: boolean;
-  onDataLoaded?: () => void; // New prop
+  onDataLoaded?: () => void; 
 }
 
 interface MadeInNode {
@@ -44,7 +44,7 @@ export default function MadeIn({
   const [isNavigating, setIsNavigating] = useState(false);
   const [prefetched, setPrefetched] = useState(false);
 
-  const { data, loading, error } = useQuery(GET_ALL_MADE_IN);
+  const { data, loading, error } = useQuery(GET_ALL_MADE_IN_MENU);
 
   const madeInItems: MadeInItem[] =
     data?.allMadeInEM?.nodes?.map((item: MadeInNode) => ({

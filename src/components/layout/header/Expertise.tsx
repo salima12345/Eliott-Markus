@@ -5,7 +5,7 @@ import ExpandableSection from "./ExpandableSection";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { useQuery } from "@apollo/client";
-import { GET_EXPERTISES } from "@/lib/graphql/queries/ExpertiseQuery";
+import { GET_EXPERTISES_MENU } from "@/lib/graphql/queries/ExpertiseQuery";
 import { startTransition } from "react";
 
 interface ExpertiseItem {
@@ -22,7 +22,7 @@ interface ExpertiseProps {
   isExpanded?: boolean;
   setExpanded?: (expanded: boolean) => void;
   isMenuOpen?: boolean;
-  onDataLoaded?: () => void; // New prop
+  onDataLoaded?: () => void; 
 }
 
 interface ExpertiseNode {
@@ -50,7 +50,7 @@ export default function Expertise({
   const [isNavigating, setIsNavigating] = useState(false);
   const [prefetched, setPrefetched] = useState(false);
 
-  const { data, loading, error } = useQuery(GET_EXPERTISES);
+  const { data, loading, error } = useQuery(GET_EXPERTISES_MENU);
 
   const expertises: ExpertiseItem[] =
     data?.expertises?.nodes?.map((expertise: ExpertiseNode) => ({

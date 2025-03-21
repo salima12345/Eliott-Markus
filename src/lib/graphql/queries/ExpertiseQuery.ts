@@ -10,6 +10,25 @@ export const GET_ALL_EXPERTISE_SLUGS = gql`
     }
   }
 `;
+export const GET_EXPERTISES_MENU = gql`
+  query GetExpertises {
+    expertises {
+      nodes {
+      id
+      
+        slug
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+        expertiseId
+      }
+    }
+  }
+`;
+
 export const GET_EXPERTISES = gql`
   query GetExpertises {
     expertises {

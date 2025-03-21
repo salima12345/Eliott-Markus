@@ -39,6 +39,27 @@ export const GET_REFERENCES = gql`
     }
   }
 `;
+export const GET_REFERENCES_HOME = gql`
+  query GetReferences {
+    references(first: 4) {
+      nodes {
+      date
+        uri
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+        slug
+      
+          
+         
+        
+      }
+    }
+  }
+`;
 
 export const GET_REFERENCE_BY_SLUG = gql`
   query GetReferenceBySlug($id: ID!) {

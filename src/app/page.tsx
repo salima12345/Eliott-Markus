@@ -3,9 +3,9 @@ import React, { Suspense, lazy, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useQuery } from '@apollo/client';
 import { HOME_PAGE_QUERY } from '@/lib/graphql/queries/HomeQueries';
-import { GET_EXPERTISES } from '@/lib/graphql/queries/ExpertiseQuery';
-import { GET_ALL_MADE_IN } from '@/lib/graphql/queries/MadeInQueries';
-import { GET_REFERENCES } from '@/lib/graphql/queries/ReferenceQueries';
+import { GET_EXPERTISES_MENU } from '@/lib/graphql/queries/ExpertiseQuery';
+import { GET_ALL_MADE_IN_MENU } from '@/lib/graphql/queries/MadeInQueries';
+import { GET_REFERENCES_HOME } from '@/lib/graphql/queries/ReferenceQueries';
 import Header from '@/components/layout/header';
 
 // Lazy load components
@@ -28,9 +28,9 @@ function App() {
   
   // Fetch all necessary global queries
   const { loading: homeLoading } = useQuery(HOME_PAGE_QUERY);
-  const { loading: expertisesLoading } = useQuery(GET_EXPERTISES);
-  const { loading: madeInLoading } = useQuery(GET_ALL_MADE_IN);
-  const { loading: referencesLoading } = useQuery(GET_REFERENCES);
+  const { loading: expertisesLoading } = useQuery(GET_EXPERTISES_MENU);
+  const { loading: madeInLoading } = useQuery(GET_ALL_MADE_IN_MENU);
+  const { loading: referencesLoading } = useQuery(GET_REFERENCES_HOME);
 
   useEffect(() => {
     if (!homeLoading && !expertisesLoading && !madeInLoading && !referencesLoading) {

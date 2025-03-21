@@ -24,6 +24,23 @@ export const GET_ALL_MADE_IN = gql`
   }
 `;
 
+export const GET_ALL_MADE_IN_MENU = gql`
+  query GetAllMadeIn {
+    allMadeInEM {
+      nodes {
+        title
+        slug
+       
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+        id
+      }
+    }
+  }
+`;
 export const GET_MADE_IN_BY_SLUG = gql`
   query GetMadeInBySlug($slug: String!) {
     madeInEMBy(slug: $slug) {

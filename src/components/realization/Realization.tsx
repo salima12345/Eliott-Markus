@@ -6,7 +6,7 @@ import AnimatedTitle from "../ui/TitleReveal";
 import Image from 'next/image';
 import { useQuery } from '@apollo/client';
 import { HOME_PAGE_QUERY } from "@/lib/graphql/queries/HomeQueries";
-import { GET_REFERENCES } from "@/lib/graphql/queries/ReferenceQueries";
+import { GET_REFERENCES_HOME } from "@/lib/graphql/queries/ReferenceQueries";
 
 // Define types
 interface WorkItemProps {
@@ -78,7 +78,7 @@ function Realization() {
   const titleRealisations = homeData?.titleRealisations || "";
 
   // Fetch references
-  const { data: referencesData } = useQuery(GET_REFERENCES);
+  const { data: referencesData } = useQuery(GET_REFERENCES_HOME);
 
   // Sort references by date in descending order and get the most recent 3
   const items: ReferenceItem[] = referencesData?.references?.nodes
