@@ -7,25 +7,25 @@ export interface FormContent {
 
 export const getFormContent = (subject: Subject): FormContent => {
   switch (subject) {
-    case Subject.Press:
+    case Subject.Presse:
       return {
-        title: "Would you like to contact us?",
-        messagePlaceholder: "Hi there! Would you like to write about us?",
+        title: "Vous souhaitez nous contacter ?",
+        messagePlaceholder: "Coucou! Vous voulez faire un papier sur nous ?",
       };
-    case Subject.Hiring:
+    case Subject.Recrutement:
       return {
-        title: "Join us",
-        messagePlaceholder: "Tell us your story, your hobbies, your dreams...",
+        title: "Rejoignez-nous",
+        messagePlaceholder: "Racontez-nous votre histoire,vos espoirs, vos rêves...",
       };
-    case Subject.Partnership: 
+    case Subject.Partenariat: 
       return {
-        title: "Let's Collaborate",
-        messagePlaceholder: "Let's get to know each other better!",
+        title: "Vous souhaitez nous contacter ?",
+        messagePlaceholder: "Faisons plus ample connaissance!",
       };
-    case Subject.Project:
+    case Subject.Projet:
       return {
-        title: "Tell Us About Your Project",
-        messagePlaceholder: "Tell us about yourself!",
+        title: "Vous souhaitez nous contacter ?",
+        messagePlaceholder: "Parlez-nous de vous!",
       };
     default:
       return {

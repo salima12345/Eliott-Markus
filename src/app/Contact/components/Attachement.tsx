@@ -28,7 +28,7 @@ const AttachmentField: React.FC<AttachmentFieldProps> = ({ onFileSelect }) => {
           onClick={handleClick}
         >
           <p className={!selectedFile ? "text-[#454545]" : ""}>
-            {selectedFile ? selectedFile.name : "Add attachment"}
+            {selectedFile ? selectedFile.name : "Ajouter vos pièces jointes"}
           </p>
           <Image
             src="/images/icons/upload.svg"

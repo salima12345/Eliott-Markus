@@ -1,32 +1,44 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
+"use client";
 
-export enum Expertise {
-  Creation = "Creation and launch",
-  Outsoucing = "Outsouced communication ",
-  BusinessDev = "Business development",
-  Branding = "Personal branding",
-  CSR = "CSR, Ethics and Soft law ",
-  Organization = "Professional Organizations ",
-  Crisis = "Crisis Management"
-}
+import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_MADE_IN_MENU } from "@/lib/graphql/queries/MadeInQueries";
 
-interface ExpertiseMenuProps {
+interface MadeMenuProps {
   selectedItem: string;
-  onSelect: (value: Expertise) => void;
+  onSelect: (value: string) => void;
 }
 
-const MadeMenu: React.FC<ExpertiseMenuProps> = ({ selectedItem, onSelect }) => {
+interface MadeInNode {
+  featuredImage: {
+    node: {
+      sourceUrl: string;
+    };
+  };
+  title: string;
+  slug: string;
+  id: number;
+}
+
+const MadeMenu: React.FC<MadeMenuProps> = ({ selectedItem, onSelect }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [contentHeight, setContentHeight] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
-  const items = Object.values(Expertise);
+
+  const { data, loading, error } = useQuery(GET_ALL_MADE_IN_MENU);
+
+  const items = data?.allMadeInEM?.nodes?.map((madeIn: MadeInNode) => ({
+    icon: madeIn.featuredImage?.node?.sourceUrl || "/images/icons/default.svg",
+    text: madeIn.title,
+    id: madeIn.id,
+  })) || [];
 
   useEffect(() => {
     if (contentRef.current) {
       setContentHeight(contentRef.current.scrollHeight);
     }
-  }, []);
+  }, [items]);
 
   const toggleExpand = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -34,12 +46,15 @@ const MadeMenu: React.FC<ExpertiseMenuProps> = ({ selectedItem, onSelect }) => {
     setIsExpanded(!isExpanded);
   };
 
-  const handleItemSelect = (item: Expertise, e: React.MouseEvent) => {
+  const handleItemSelect = (item: string, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     onSelect(item);
     setIsExpanded(false);
   };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div className="relative group">
@@ -77,16 +92,16 @@ const MadeMenu: React.FC<ExpertiseMenuProps> = ({ selectedItem, onSelect }) => {
             visibility: isExpanded ? "visible" : "hidden",
           }}
         >
-          {items.map((item) => (
+            {items.map((item: { id: number; text: string }) => (
             <button
-              key={item}
+              key={item.id}
               type="button"
               className="w-full px-6 py-4 text-left transition-colors"
-              onClick={(e) => handleItemSelect(item, e)}
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleItemSelect(item.text, e)}
             >
-              {item}
+              {item.text}
             </button>
-          ))}
+            ))}
         </div>
       </div>
     </div>

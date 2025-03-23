@@ -14,8 +14,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { getFormContent } from './components/ContactFormContent';
 import MadeMenu from './components/MadeIn';
 import ExpertiseMenu from './components/Expertise';
-import { Expertise as ExpertiseType } from './components/Expertise';
-import { Expertise as MadeInType } from './components/MadeIn';
+
 import { Subject } from '@/types/enums';
 import { CF7_FORM_IDS } from '@/utils/config';
 import Header from '@/components/layout/header';
@@ -58,8 +57,8 @@ const Contact: React.FC = () => {
 
   const selectedSubject = watch('subject') as Subject;
   const formContent = getFormContent(selectedSubject);
-  const showAttachment = selectedSubject === 'Hiring';
-  const showProjectMenus = selectedSubject === 'Project';
+  const showAttachment = selectedSubject === 'Recrutement';
+  const showProjectMenus = selectedSubject === 'Projet';
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
@@ -185,28 +184,29 @@ const Contact: React.FC = () => {
             {showProjectMenus && (
               <>
                 <div className="flex flex-col">
-                  <Controller
-                    name="expertise"
-                    control={control}
-                    render={({ field: { onChange, value } }) => (
-                      <ExpertiseMenu
-                        selectedItem={value || 'E&M expertise *'}
-                        onSelect={(newValue: ExpertiseType) => onChange(newValue)}
-                      />
-                    )}
-                  />
+                <Controller
+                  name="expertise"
+                  control={control}
+                  render={({ field: { onChange, value } }) => (
+                <ExpertiseMenu
+                  selectedItem={value || "E&M expertise *"}
+                   onSelect={(newValue) => onChange(newValue)}
+                    />
+                )}
+                 />
+
                   {errors.expertise && <p className="text-red-500 text-xs mt-1">{errors.expertise.message}</p>}
                 </div>
                 <div className="flex flex-col">
-                  <Controller
-                    name="madeIn"
-                    control={control}
-                    render={({ field: { onChange, value } }) => (
-                      <MadeMenu
-                        selectedItem={value || 'Made in em *'}
-                        onSelect={(newValue: MadeInType) => onChange(newValue)}
-                      />
-                    )}
+                <Controller
+                  name="madeIn"
+                  control={control}
+                  render={({ field: { onChange, value } }) => (
+                  <MadeMenu
+                  selectedItem={value || "Made in em *"}
+                  onSelect={(newValue) => onChange(newValue)}
+                  />
+                )}
                   />
                   {errors.madeIn && <p className="text-red-500 text-xs mt-1">{errors.madeIn.message}</p>}
                 </div>

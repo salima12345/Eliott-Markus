@@ -8,7 +8,6 @@ import { useQuery } from '@apollo/client';
 import { HOME_PAGE_QUERY } from "@/lib/graphql/queries/HomeQueries";
 import { GET_REFERENCES_HOME } from "@/lib/graphql/queries/ReferenceQueries";
 
-// Define types
 interface WorkItemProps {
   title: string;
   index: number;
