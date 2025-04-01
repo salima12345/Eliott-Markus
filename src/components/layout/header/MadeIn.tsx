@@ -52,7 +52,7 @@ export default function MadeIn({
       slug: item.slug,
       path: `/MadeIn/${item.slug}`,
       id: item.id,
-    })) || [];
+    })).reverse() || [];
 
   // Notify parent when data is loaded
   useEffect(() => {

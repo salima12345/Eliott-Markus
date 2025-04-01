@@ -58,7 +58,7 @@ export default function Expertise({
       text: expertise.title,
       path: `/Expertise/${expertise.slug}`,
       expertiseId: expertise.expertiseId,
-    })) || [];
+    })).reverse() || [];
 
   // Notify parent when data is loaded
   useEffect(() => {

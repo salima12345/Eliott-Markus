@@ -125,7 +125,7 @@ export default function EcosystemModal({ onClose }: EcosystemModalProps) {
 
   const modalContent = (
     <motion.div
-      className="fixed flex items-center justify-center inset-0 w-screen min-h-screen bg-black bg-opacity-60 backdrop-blur-sm z-[50] overflow-auto flex justify-center items-center px-5 py-1"
+      className="fixed inset-0 w-screen min-h-screen bg-black bg-opacity-60 backdrop-blur-sm z-[50] overflow-auto flex justify-center items-center px-5 py-1"
       initial="hidden"
       animate="visible"
       exit="hidden"
