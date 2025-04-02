@@ -25,14 +25,25 @@ const CustomLoader = () => (
   </div>
 );
 
-function App() {
+function AppContent() {
   const [allDataLoaded, setAllDataLoaded] = useState(false);
   
-  // Fetch all necessary global queries
-  const { loading: homeLoading } = useQuery(HOME_PAGE_QUERY);
-  const { loading: expertisesLoading } = useQuery(GET_EXPERTISES_MENU);
-  const { loading: madeInLoading } = useQuery(GET_ALL_MADE_IN_MENU);
-  const { loading: referencesLoading } = useQuery(GET_REFERENCES_HOME);
+  // Fetch all necessary global queries with optimized options
+  const { loading: homeLoading } = useQuery(HOME_PAGE_QUERY, {
+    fetchPolicy: 'cache-and-network',
+  });
+  
+  const { loading: expertisesLoading } = useQuery(GET_EXPERTISES_MENU, {
+    fetchPolicy: 'cache-and-network',
+  });
+  
+  const { loading: madeInLoading } = useQuery(GET_ALL_MADE_IN_MENU, {
+    fetchPolicy: 'cache-and-network',
+  });
+  
+  const { loading: referencesLoading} = useQuery(GET_REFERENCES_HOME, {
+    fetchPolicy: 'cache-and-network',
+  });
 
   useEffect(() => {
     if (!homeLoading && !expertisesLoading && !madeInLoading && !referencesLoading) {
@@ -40,71 +51,88 @@ function App() {
     }
   }, [homeLoading, expertisesLoading, madeInLoading, referencesLoading]);
 
+  // Start pre-loading components when data starts loading
+  useEffect(() => {
+    if (homeLoading || expertisesLoading || madeInLoading || referencesLoading) {
+      const preloadComponents = async () => {
+        const components = [Hero, About, Values, ValuesMobile, Realization, Clients, Footer];
+        await Promise.all(components.map(component => component({})));
+      };
+      preloadComponents();
+    }
+  }, []);
+
   if (!allDataLoaded) return <CustomLoader />;
 
   return (
+    <Suspense fallback={<CustomLoader />}>
+      <Header />
+
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="overflow-hidden">
+        <Hero />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}>
+        <About />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="hidden xl:block">
+        <Values />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="xl:hidden">
+        <ValuesMobile />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}>
+        <Realization />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}>
+        <Clients />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}>
+        <Footer />
+      </motion.div>
+    </Suspense>
+  );
+}
+
+function App() {
+  return (
     <ApolloProvider client={client}>
-      <Suspense fallback={<CustomLoader />}>
-        <Header />
-
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="overflow-hidden">
-          <Hero />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}>
-          <About />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="hidden xl:block">
-          <Values />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="xl:hidden">
-          <ValuesMobile />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}>
-          <Realization />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}>
-          <Clients />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}>
-          <Footer />
-        </motion.div>
-      </Suspense>
+      <AppContent />
     </ApolloProvider>
   );
 }
