@@ -1,12 +1,14 @@
-"use client"
+"use client";
+
 import React, { Suspense, lazy, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useQuery } from '@apollo/client';
+import { useQuery, ApolloProvider } from '@apollo/client';
 import { HOME_PAGE_QUERY } from '@/lib/graphql/queries/HomeQueries';
 import { GET_EXPERTISES_MENU } from '@/lib/graphql/queries/ExpertiseQuery';
 import { GET_ALL_MADE_IN_MENU } from '@/lib/graphql/queries/MadeInQueries';
 import { GET_REFERENCES_HOME } from '@/lib/graphql/queries/ReferenceQueries';
 import Header from '@/components/layout/header';
+import client from '@/lib/apollo-client';
 
 // Lazy load components
 const Hero = lazy(() => import('@/components/hero/Hero'));
@@ -41,74 +43,69 @@ function App() {
   if (!allDataLoaded) return <CustomLoader />;
 
   return (
-    <Suspense fallback={<CustomLoader />}>
-      <Header />
+    <ApolloProvider client={client}>
+      <Suspense fallback={<CustomLoader />}>
+        <Header />
 
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="overflow-hidden">
+          <Hero />
+        </motion.div>
 
-        className="overflow-hidden">
-        <Hero />
-      </motion.div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}>
+          <About />
+        </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="hidden xl:block">
+          <Values />
+        </motion.div>
 
-        viewport={{ once: true }}>
-        <About />
-      </motion.div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="xl:hidden">
+          <ValuesMobile />
+        </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}>
+          <Realization />
+        </motion.div>
 
-        className="hidden xl:block">
-        <Values />
-      </motion.div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}>
+          <Clients />
+        </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-
-        className="xl:hidden">
-        <ValuesMobile />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-
-        viewport={{ once: true }}>
-        <Realization />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-
-        viewport={{ once: true }}>
-        <Clients />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-
-        viewport={{ once: true }}>
-        <Footer />
-      </motion.div>
-    </Suspense>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}>
+          <Footer />
+        </motion.div>
+      </Suspense>
+    </ApolloProvider>
   );
 }
 
