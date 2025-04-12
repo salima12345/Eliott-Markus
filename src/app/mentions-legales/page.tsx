@@ -13,7 +13,7 @@ export default async function MentionsLegales() {
   const page = data?.pages?.nodes?.[0];
 
   if (!page) {
-    return <p>Page not found</p>;
+    return <p>Page not foun</p>;
   }
 
   return (
